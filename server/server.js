@@ -5,7 +5,7 @@ const app = express()
 const port = 80;
 
 const MongoClient = require('mongodb').MongoClient
-const url = 'mongodb://paredros-creator-db:27017'
+const url = 'mongodb://paredros-db:27017'
 const dbName = 'paredrosCreatorDb'
 const collName = 'adventures'
 
