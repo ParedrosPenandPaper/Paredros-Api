@@ -3,10 +3,10 @@ stages:
   - build
   
 test-image:
-  - stage: test
-  - script: echo 'running tests....'
+  stage: test
+  script: echo 'running tests....'
   
 build-image:
-  - stage: build
-  - script: docker build -t paredros-backend .
+  stage: build
+  script: docker build -t paredros-backend .
   
