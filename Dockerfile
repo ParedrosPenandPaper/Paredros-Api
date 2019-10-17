@@ -1,16 +1,15 @@
-# This file is a template, and might need editing before it works on your project.
-FROM node:8.11
+FROM node:10.6-alpine
 
-WORKDIR /usr/src/app
+EXPOSE 80
 
-ARG NODE_ENV
+ARG NODE_ENV=production
 ENV NODE_ENV $NODE_ENV
 
-COPY package.json /usr/src/app/
+WORKDIR /usr/src/app
+COPY package.json .
 RUN npm install
+COPY . .
 
-COPY . /usr/src/app
+RUN npm run build
 
-# replace this with your application's default port
-EXPOSE 8888
-CMD [ "npm", "start" ]
+CMD [ "node", "server.js" ]
