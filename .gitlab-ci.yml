@@ -5,8 +5,9 @@ stages:
 test-image:
   stage: test
   script: echo 'running tests....'
+  tags: deploy
   
 build-image:
   stage: build
   script: docker build -t paredros-backend .
-  
+  tags: deploy
