@@ -11,9 +11,5 @@ test-image:
 build-image:
   stage: build
   script: docker build -t paredros-backend .
-<<<<<<< HEAD
-  tags: 
-=======
   tags:
->>>>>>> 0aae93ec474f02e068f27007119aeab5421e9218
     - deploy
