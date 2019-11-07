@@ -2,28 +2,5 @@
 
 ## Project setup
 ```
-npm install
+docker run -d -e VIRTUAL_HOST=backend.it-projekt19-6.informatik.fh-nuernberg.de --network paredros-net --name paredros-backend paredros-backend
 ```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
