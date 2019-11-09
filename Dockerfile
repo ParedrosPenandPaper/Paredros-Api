@@ -4,7 +4,7 @@ EXPOSE 80
 
 WORKDIR /usr/src/app
 COPY node_modules/ node_modules/
-COPY public/css/ css/
+COPY public/css/ public/css/
 COPY server.js .
 
 CMD [ "node", "server.js" ]
