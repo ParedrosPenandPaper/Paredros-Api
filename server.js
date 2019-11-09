@@ -4,7 +4,7 @@ const express = require('express')
 const app = express()
 const port = 80;
 
-app.use(express.static('css'))
+app.use(express.static('public'))
 
 const MongoClient = require('mongodb').MongoClient
 const url = 'mongodb://paredros-db:27017'
