@@ -1,0 +1,8 @@
+{
+  "name": "paredros-api",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "express": "^1.6.0"
+  }
+}
