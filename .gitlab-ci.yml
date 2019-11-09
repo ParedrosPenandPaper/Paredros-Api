@@ -1,15 +1,26 @@
 stages:
   - test
-  - build
+  - npm-build
+  - docker-build
   
-test-image:
+test:
   stage: test
-  script: echo 'running tests....'
+  script: node test/test.js
   tags:
     - deploy
   
-build-image:
-  stage: build
-  script: docker build -t paredros-backend .
+npm-build:
+  stage: npm-build
+  artifacts:
+    paths:
+      - node_modules
+  script:
+    - npm install --progress=false
+  tags:
+    - deploy
+
+docker-build:
+  stage: docker-build
+  script: docker build -t paredros-api .
   tags:
     - deploy
