@@ -13,6 +13,11 @@ const url = 'mongodb://paredros-db:27017'
 const dbName = 'paredrosCreatorDb'
 const collName = 'adventures'
 
+app.get('/', (req, res) => {
+    res.setHeader('Set-Cookie', 'api-reached=yisss')
+    res.status(200).send('your reched paredros api')
+})
+
 app.get('/getTestAdventure', (req, res) => {
     MongoClient.connect(url, {useNewUrlParser: true})
     .then(client => {
@@ -28,7 +33,7 @@ app.get('/getTestAdventure', (req, res) => {
     .catch(err => res.status(400).send('failed: ' + err))
 })
 
-app.post('/login', (req, res) => {
+app.get('/login', (req, res) => {
     res.setHeader('Set-Cookie', 'loggedin=true')
     res.status(200).send()
 })
