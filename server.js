@@ -6,7 +6,7 @@ const app = express()
 const port = 80;
 
 app.use(express.static('public'))
-app.use(cors)
+app.use(cors())
 
 const MongoClient = require('mongodb').MongoClient
 const url = 'mongodb://paredros-db:27017'
@@ -15,7 +15,7 @@ const collName = 'adventures'
 
 app.get('/', (req, res) => {
     res.setHeader('Set-Cookie', 'api-reached=yisss')
-    res.status(200).send('your reched paredros api')
+    res.status(200).send('your reached paredros api')
 })
 
 app.get('/getTestAdventure', (req, res) => {
@@ -39,5 +39,5 @@ app.get('/login', (req, res) => {
 })
 
 app.listen(port, () => {
-    console.log('paredros creator running on port ' + port)
+    console.log('paredros api running on port ' + port)
 })
