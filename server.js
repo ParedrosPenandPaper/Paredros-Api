@@ -26,6 +26,11 @@ app.get('/getTestAdventure', (req, res) => {
     .catch(err => res.status(400).send('failed: ' + err))
 })
 
+app.post('/login', (req, res) => {
+    res.setHeader('Set-Cookie', 'loggedin=true')
+    res.status(200).send()
+})
+
 app.listen(port, () => {
     console.log('paredros creator running on port ' + port)
 })
