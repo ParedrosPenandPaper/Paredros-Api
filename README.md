@@ -1,4 +1,4 @@
-# paredros-backend
+# paredros-api
 
 ## Project setup
 ```
