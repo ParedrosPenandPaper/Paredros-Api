@@ -1,0 +1,163 @@
+---
+swagger: "2.0"
+info:
+  description: "Paredros API for Database"
+  version: "0.0.1"
+  title: "Paredros API"
+host: "it-projekt19-6.informatik.fh-nuernberg.de:8082"
+basePath: "/api"
+tags:
+- name: "adventure"
+  description: "Acces to the Paredros database"
+- name: "auth"
+  description: "Handels authorisation and athenification"
+schemes:
+- "http"
+paths:
+  /adventures:
+    get:
+      tags:
+      - "adventure"
+      summary: "Gets all Adventures"
+      description: "Gets all user relatet Adventures from the list."
+      operationId: "adventuresGET"
+      parameters: []
+      responses:
+        "200":
+          description: "OK"
+      x-swagger-router-controller: "Adventure"
+    post:
+      tags:
+      - "adventure"
+      summary: "Creates a Adventure"
+      description: "Adds a Adventure to the list."
+      operationId: "adventuresPOST"
+      parameters:
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          type: "object"
+      responses:
+        "200":
+          description: "OK"
+      x-swagger-router-controller: "Adventure"
+    delete:
+      tags:
+      - "adventure"
+      summary: "Delets all Adenvtures"
+      description: "Delets all user relatet Adventure from the List."
+      operationId: "adventuresDELETE"
+      parameters: []
+      responses:
+        "200":
+          description: "OK"
+      x-swagger-router-controller: "Adventure"
+  /adventures/{adventureId}:
+    get:
+      tags:
+      - "adventure"
+      summary: "Gets adventure by id"
+      description: "Gets adventure from list by id"
+      operationId: "adventuresAdventureIdGET"
+      parameters:
+      - name: "adventureId"
+        in: "path"
+        required: true
+        type: "integer"
+      responses:
+        "200":
+          description: "OK"
+      x-swagger-router-controller: "Adventure"
+    delete:
+      tags:
+      - "adventure"
+      summary: "Delets adventure"
+      description: "Delets adventure by id"
+      operationId: "adventuresAdventureIdDELETE"
+      parameters:
+      - name: "adventureId"
+        in: "path"
+        required: true
+        type: "integer"
+      responses:
+        "200":
+          description: "OK"
+      x-swagger-router-controller: "Adventure"
+    patch:
+      tags:
+      - "adventure"
+      summary: "Updates adventure"
+      description: "Updates adventure by id"
+      operationId: "adventuresAdventureIdPATCH"
+      parameters:
+      - name: "adventureId"
+        in: "path"
+        required: true
+        type: "integer"
+      - in: "body"
+        name: "body"
+        required: true
+        schema:
+          type: "object"
+      responses:
+        "200":
+          description: "OK"
+      x-swagger-router-controller: "Adventure"
+  /adventures/testAdventure:
+    get:
+      tags:
+      - "adventure"
+      summary: "Get test Adventure"
+      description: "get a test Adventure for beginners to learn writing stories."
+      operationId: "adventuresTestAdventureGET"
+      parameters: []
+      responses:
+        "200":
+          description: "OK"
+      x-swagger-router-controller: "Adventure"
+  /auth/login:
+    post:
+      tags:
+      - "auth"
+      summary: "login user"
+      description: "Username and password need to be send in trade of a JWT"
+      operationId: "authLoginPOST"
+      parameters: 
+        - name: api_key
+          in: header
+          required: false
+          type: string
+      responses:
+        "200":
+          description: "OK"
+      x-swagger-router-controller: "Auth"
+  /auth/register:
+    post:
+      tags:
+      - "auth"
+      summary: "register user"
+      description: "register user in paredros"
+      operationId: "authRegisterPOST"
+      parameters: 
+        - name: api_key
+          in: header
+          required: false
+          type: string
+      responses:
+        "200":
+          description: "OK"
+      x-swagger-router-controller: "Auth"
+  /auth/salt:
+    get:
+      tags:
+      - "auth"
+      summary: "get user specific salt"
+      description: "get salt for hashing password"
+      operationId: "authSaltGET"
+      parameters: []
+      responses:
+        "200":
+          description: "OK"
+      x-swagger-router-controller: "Auth"
+definitions: {}

@@ -1,10 +1,25 @@
 {
   "name": "paredros-api",
-  "version": "0.1.0",
+  "version": "0.0.1",
+  "description": "Paredros API for Database",
+  "main": "index.js",
+  "scripts": {
+    "prestart": "npm install",
+    "start": "node index.js"
+  },
+  "keywords": [
+    "swagger"
+  ],
+  "license": "Unlicense",
   "private": true,
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.17.1",
-    "mongodb": "^3.3.3"
+    "connect": "^3.2.0",
+    "js-yaml": "^3.3.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongodb": "^3.3.4",
+    "sjcl": "^1.0.8",
+    "swagger-tools": "^0.10.4"
   }
 }
