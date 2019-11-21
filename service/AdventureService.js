@@ -15,8 +15,10 @@ const collName = 'adventures'
  **/
 exports.adventuresGET = function() {
   return new Promise(function(resolve, reject) {
+    console.log("debug 1")
     MongoClient.connect(url, {useNewUrlParser: true, useUnifiedTopology: true})
     .then(client => {
+      console.log("debug 2")
       client
         .db(dbName)
         .collection(collName)
