@@ -107,7 +107,7 @@ exports.adventuresAdventureIdGET = function(adventureId) {
           .finally(() => client.close())
     })
     .catch(err => reject(utils.respondWithCode(500,'could not connect to db: ' + err)))
-    resolve();
+    reject(utils.respondWithCode(500,"Lul such server error"));
   });
 }
 
