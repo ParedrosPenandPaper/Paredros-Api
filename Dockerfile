@@ -8,4 +8,4 @@ COPY public/css/ public/css/
 COPY data/ data/
 COPY server.js .
 
-CMD [ "node", "server.js" ]
+CMD [ "node", "index.js" ]
