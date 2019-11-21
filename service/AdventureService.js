@@ -6,6 +6,7 @@ const MongoClient = require('mongodb').MongoClient
 const url = 'mongodb://paredros-db:27017'
 const dbName = 'paredros'
 const collName = 'adventures'
+
 /**
  * Gets all Adventures
  * Gets all user relatet Adventures from the list.
@@ -19,16 +20,16 @@ exports.adventuresGET = function() {
       client
         .db(dbName)
         .collection(collName)
-        .findOne( {objectID: adventureId} )
-          .then(adventure => {
-            console.log(`successfully retrieved adventure with id "${adventureId}" and title "${adventure.meta.title}" from db`)
-            resolve(utils.respondWithCode(200,adventure))
+        .find({} )
+          .then(adventures => {
+            console.log(`successfully retrieved all adventures from db`)
+            resolve(utils.respondWithCode(200,adventures))
           })
-          .catch(reject(utils.respondWithCode(404,`adventure with id ${adventureId} does not exist: ${error}`)))
+          .catch(reject(utils.respondWithCode(404,`adventures does not exist: ${error}`)))
           .finally(() => client.close())
     })
     .catch(err => reject(utils.respondWithCode(500,'could not connect to db: ' + err)))
-  reject(utils.respondWithCode(500,""))
+  reject(utils.respondWithCode(500,"could not connect to db"))
   });
 }
 
@@ -90,8 +91,10 @@ exports.adventuresDELETE = function() {
  **/
 exports.adventuresAdventureIdGET = function(adventureId) {
   return new Promise(function(resolve, reject) {
+    console.log(adventureId)
     MongoClient.connect(url, {useNewUrlParser: true, useUnifiedTopology: true})
     .then(client => {
+      console.log(adventureId)
       client
         .db(dbName)
         .collection(collName)
