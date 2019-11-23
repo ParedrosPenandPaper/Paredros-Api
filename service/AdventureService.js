@@ -24,7 +24,7 @@ exports.adventuresGET = function() {
       const collection = db.collection(collName)
       console.log("collection - retrieved adventures collection: " + collection)
 
-      collection.findOne({})
+      collection.find({}).toArray()
         .then(adventures => {
           console.log('successfully retrieved all adventures from db: ' + adventures)
           resolve(adventures)
