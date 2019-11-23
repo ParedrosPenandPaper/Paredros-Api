@@ -24,7 +24,7 @@ exports.adventuresGET = function() {
       const collection = db.collection(collName)
       console.log("collection - retrieved adventures collection: " + collection)
 
-      collection.findOne({_id: "5dd9840b747f5553a98292b2"})
+      collection.findOne({})
         .then(adventures => {
           console.log('successfully retrieved all adventures from db: ' + adventures)
           resolve(adventures)
