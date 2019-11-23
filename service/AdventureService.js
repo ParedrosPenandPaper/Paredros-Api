@@ -33,7 +33,10 @@ exports.adventuresGET = function() {
           console.log('failed to retrieve all adventures: ' + error)
           reject(error)
         })
-        .finally(() => client.close())
+        .finally(() => {
+          console.log('finally cleaning up the rest')
+          client.close()
+        })
     })
     .catch(error => {
       console.log('failed to establish connection to db')
