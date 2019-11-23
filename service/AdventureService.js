@@ -15,20 +15,19 @@ const collName = 'adventures'
  **/
 exports.adventuresGET = function() {
   return new Promise(function(resolve, reject) {
-    console.log("debug 1")
+    console.log("trying to get all adventures")
     MongoClient.connect(url, {useNewUrlParser: true, useUnifiedTopology: true})
     .then(client => {
-      console.log("debug 2")
+      console.log("client - successfully connected to db")
       client
         .db(dbName)
         .collection(collName)
-        .find({} )
-          .then(adventures => {
-            console.log(`successfully retrieved all adventures from db`)
-            resolve(utils.respondWithCode(200,adventures))
-          })
-          .catch(error => reject(utils.respondWithCode(404,`adventures does not exist: ${error}`)))
-          .finally(() => client.close())
+        .find({}).toArray(adventures => {
+          onsole.log('successfully retrieved all adventures from db')
+          resolve(utils.respondWithCode(200, adventures))
+        })
+        .catch(error => reject(utils.respondWithCode(404,`adventures does not exist: ${error}`)))
+        .finally(() => client.close())
     })
     .catch(err => reject(utils.respondWithCode(500,'could not connect to db: ' + err)))
   });
