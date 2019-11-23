@@ -22,8 +22,7 @@ exports.adventuresGET = function() {
       const db = client.db(dbName)
       console.log("db - retrieved paredros db: " + db)
       const collection = db.collection(collName)
-      const collString = JSON.stringify(collection)
-      console.log("collection - retrieved adventures collection: " + collString)
+      console.log("collection - retrieved adventures collection: " + collection)
 
       collection.findOne({_id: "5dd9840b747f5553a98292b2"})
         .then(adventures => {
