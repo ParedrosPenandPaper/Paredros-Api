@@ -18,20 +18,22 @@ exports.adventuresGET = function() {
     console.log("trying to get all adventures")
     MongoClient.connect(url, {useNewUrlParser: true, useUnifiedTopology: true})
     .then(client => {
-      console.log("client - successfully connected to db")
-      client
-        .db(dbName)
-        .collection(collName)
-        .find({})
-          .then(adventures => {
-            console.log('successfully retrieved all adventures from db: ' + adventures)
-            resolve(adventures)
-          })
-          .catch(error => {
-            console.log('failed to retrieve all adventures: ' + error)
-            reject(error)
-          })
-          .finally(() => client.close())
+      console.log("client - successfully connected to db server: " + client)
+      const db = client.db(dbName)
+      console.log("db - retrieved paredros db: " + db)
+      const collection = db.collection(collName)
+      console.log("collection - retrieved adventures collection: " + collection)
+
+      collection.find({})
+        .then(adventures => {
+          console.log('successfully retrieved all adventures from db: ' + adventures)
+          resolve(adventures)
+        })
+        .catch(error => {
+          console.log('failed to retrieve all adventures: ' + error)
+          reject(error)
+        })
+        .finally(() => client.close())
     })
     .catch(error => {
       console.log('failed to establish connection to db')
