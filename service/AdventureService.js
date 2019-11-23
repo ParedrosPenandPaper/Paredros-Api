@@ -27,11 +27,10 @@ exports.adventuresGET = function() {
             console.log(`successfully retrieved all adventures from db`)
             resolve(utils.respondWithCode(200,adventures))
           })
-          .catch(reject(utils.respondWithCode(404,`adventures does not exist: ${error}`)))
+          .catch(error => reject(utils.respondWithCode(404,`adventures does not exist: ${error}`)))
           .finally(() => client.close())
     })
     .catch(err => reject(utils.respondWithCode(500,'could not connect to db: ' + err)))
-  reject(utils.respondWithCode(500,"could not connect to db"))
   });
 }
 
