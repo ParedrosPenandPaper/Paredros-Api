@@ -23,7 +23,7 @@ exports.adventuresGET = function() {
         .db(dbName)
         .collection(collName)
         .find({}).toArray(adventures => {
-          onsole.log('successfully retrieved all adventures from db')
+          console.log('successfully retrieved all adventures from db')
           resolve(utils.respondWithCode(200, adventures))
         })
         .catch(error => reject(utils.respondWithCode(404,`adventures does not exist: ${error}`)))
