@@ -39,7 +39,7 @@ exports.adventuresGET = function() {
         })
     })
     .catch(error => {
-      console.log('failed to establish connection to db')
+      console.log('general fuckery: ' + error)
       reject(error)
     })
   });
