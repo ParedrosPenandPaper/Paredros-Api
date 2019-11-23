@@ -22,15 +22,16 @@ exports.adventuresGET = function() {
       client
         .db(dbName)
         .collection(collName)
-        .find({}).toArray(adventures => {
-          console.log('successfully retrieved all adventures from db ' + adventures.toString())
-          resolve(adventures)
-        })
-        .catch(error => {
-          console.log('failed to retrieve all adventures')
-          reject(error)
-        })
-        .finally(() => client.close())
+        .find({})
+          .then(adventures => {
+            console.log('successfully retrieved all adventures from db: ' + adventures)
+            resolve(adventures)
+          })
+          .catch(error => {
+            console.log('failed to retrieve all adventures: ' + error)
+            reject(error)
+          })
+          .finally(() => client.close())
     })
     .catch(error => {
       console.log('failed to establish connection to db')
