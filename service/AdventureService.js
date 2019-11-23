@@ -23,7 +23,7 @@ exports.adventuresGET = function() {
         .db(dbName)
         .collection(collName)
         .find({}).toArray(adventures => {
-          console.log('successfully retrieved all adventures from db')
+          console.log('successfully retrieved all adventures from db ' + adventures.toString())
           resolve(adventures)
         })
         .catch(error => {
