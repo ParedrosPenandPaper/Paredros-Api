@@ -24,12 +24,18 @@ exports.adventuresGET = function() {
         .collection(collName)
         .find({}).toArray(adventures => {
           console.log('successfully retrieved all adventures from db')
-          resolve(utils.respondWithCode(200, adventures))
+          resolve(adventures)
         })
-        .catch(error => reject(utils.respondWithCode(404,`adventures does not exist: ${error}`)))
+        .catch(error => {
+          console.log('failed to retrieve all adventures')
+          reject(error)
+        })
         .finally(() => client.close())
     })
-    .catch(err => reject(utils.respondWithCode(500,'could not connect to db: ' + err)))
+    .catch(error => {
+      console.log('failed to establish connection to db')
+      reject(error)
+    })
   });
 }
 
