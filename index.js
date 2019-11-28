@@ -4,6 +4,7 @@ var fs = require('fs'),
     path = require('path'),
     http = require('http');
 
+var jwt = require('jsonwebtoken');
 var app = require('connect')();
 var swaggerTools = require('swagger-tools');
 var jsyaml = require('js-yaml');
@@ -13,6 +14,16 @@ var serverPort = 80;
 var serveStatic = require('serve-static')
 app.use(serveStatic('public/css', { 'index': false }));
 
+//middleware for Token verifikation 
+app.use("/api/adventures",function middleware1(req, res, next) {
+  try {
+    var decode = jwt.verify(req.headers.token, process.env.paredrosSecretKey);
+    console.log(decode)
+    next();
+  } catch(err) {
+    res.end("JWT that was send wasnt vaild");
+  }
+});
 //app.use(cors({ credentials: true }))
 // swaggerRouter configuration
 var options = {
