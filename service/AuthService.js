@@ -24,11 +24,11 @@ exports.authLoginPOST = function(email,hashedpassword) {
       client
         .db(dbName)
         .collection(collName)
-        .findOne({"email": email, "hashedpassword": hashedpassword})
+        .find({"email": email, "hashedpassword": hashedpassword}).toArray()
 
           .then(user => {
-            console.log(`successfully retrieved user with name "${user.username}" and email "${user.email}" from db`)
-            resolve(utils.respondWithCode(200,user.token))
+            console.log(`successfully retrieved user with name "${user[0]}.username}" and email "${user.email}" from db`)
+            resolve(utils.respondWithCode(200,user[0].token))
           })
 
           .catch(error => reject(utils.respondWithCode(404,`user with email ${email} does not exist: ${error}`)))
