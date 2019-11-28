@@ -124,7 +124,11 @@ paths:
       description: "Username and password need to be send in trade of a JWT"
       operationId: "authLoginPOST"
       parameters: 
-        - name: api_key
+        - name: email
+          in: header
+          required: false
+          type: string
+        - name: hashedpassword
           in: header
           required: false
           type: string
@@ -140,7 +144,19 @@ paths:
       description: "register user in paredros"
       operationId: "authRegisterPOST"
       parameters: 
-        - name: api_key
+        - name: username
+          in: header
+          required: false
+          type: string
+        - name: hashedpassword
+          in: header
+          required: false
+          type: string
+        - name: email
+          in: header
+          required: false
+          type: string
+        - name: salt
           in: header
           required: false
           type: string
@@ -153,9 +169,13 @@ paths:
       tags:
       - "auth"
       summary: "get user specific salt"
-      description: "get salt for hashing password"
+      description: "get salt for hashing userpassword"
       operationId: "authSaltGET"
-      parameters: []
+      parameters:
+        - name: email
+          in: header
+          required: false
+          type: string
       responses:
         "200":
           description: "OK"

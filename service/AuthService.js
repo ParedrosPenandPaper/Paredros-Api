@@ -1,6 +1,14 @@
 'use strict';
 
+var utils = require('../utils/writer.js');
 var jwt = require('jsonwebtoken');
+
+const ObjectId = require('mongodb').ObjectId
+const MongoClient = require('mongodb').MongoClient
+const url = 'mongodb://paredros-db:27017'
+const dbName = 'paredros'
+const collName = 'users'
+
 
 /**
  * login user
@@ -8,10 +16,25 @@ var jwt = require('jsonwebtoken');
  *
  * no response value expected for this operation
  **/
-exports.authLoginPOST = function() {
+exports.authLoginPOST = function(email,hashedpassword) {
   return new Promise(function(resolve, reject) {
-    //abfrage an die Datenbank
-    resolve();
+    console.log("trying to get user with email: " + email)
+    MongoClient.connect(url, {useNewUrlParser: true, useUnifiedTopology: true})
+    .then(client => {
+      client
+        .db(dbName)
+        .collection(collName)
+        .findOne({email: email, hashedpassword: hashedpassword})
+
+          .then(user => {
+            console.log(`successfully retrieved user with name "${user.username}" and email "${user.email}" from db`)
+            resolve(utils.respondWithCode(200,user.token))
+          })
+
+          .catch(error => reject(utils.respondWithCode(404,`user with email ${email} does not exist: ${error}`)))
+          .finally(() => client.close())
+    })
+    .catch(err => reject(utils.respondWithCode(500,'could not connect to db: ' + err)))
   });
 }
 
@@ -22,14 +45,46 @@ exports.authLoginPOST = function() {
  *
  * no response value expected for this operation
  **/
-exports.authRegisterPOST = function(credentials) {
+exports.authRegisterPOST = function(email,username,hashedpassword,salt) {
   return new Promise(function(resolve, reject) {
-    var token = jwt.sign({ payload }, 'secret');
-    resolve();
+    var payload = {
+      email: email,
+      username: username,
+      iss: "paredrosAPI"
+    };
+    var token = jwt.sign(payload , 'secret');
+    var user = {
+      email: email,
+      username: username,
+      password: hashedpassword,
+      token: token,
+      salt: salt
+    };
+    console.log(`trying to store user with name "${username}" and email "${email}"`)
+    MongoClient.connect(url, {useNewUrlParser: true, useUnifiedTopology: true})
+      .then(client => {
+        client
+          .db(dbName)
+          .collection(collName)
+  
+          .insertOne(user)
+  
+            .then(id => {
+              console.log(`successfully stored user with "${id} in db"`)
+              resolve(utils.respondWithCode(201, {token : token}))
+            })
+  
+            .catch(error => {
+              console.log(error)
+              reject(utils.respondWithCode(500,`unable to store user with name "${username}" and email "${email}" in db: ${error}`))
+            })
+  
+            .finally(() => client.close())
+      })
+    .catch(err => reject(utils.respondWithCode(500,'could not connect to db: ' + err)))
   });
 }
-
-
+ 
 /**
  * get user specific salt
  * get salt for hashing password
@@ -38,7 +93,23 @@ exports.authRegisterPOST = function(credentials) {
  **/
 exports.authSaltGET = function() {
   return new Promise(function(resolve, reject) {
-    resolve();
+    console.log("trying to get salt from user with email: " + email)
+    MongoClient.connect(url, {useNewUrlParser: true, useUnifiedTopology: true})
+    .then(client => {
+      client
+        .db(dbName)
+        .collection(collName)
+        .findOne({email: email})
+
+          .then(user => {
+            console.log(`successfully retrieved salt from user with name "${user.username}" and email "${user.email}" from db`)
+            resolve(utils.respondWithCode(200,user.salt))
+          })
+
+          .catch(error => reject(utils.respondWithCode(404,`user with email ${email} does not exist: ${error}`)))
+          .finally(() => client.close())
+    })
+    .catch(err => reject(utils.respondWithCode(500,'could not connect to db: ' + err)))
   });
 }
 
