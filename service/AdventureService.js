@@ -1,4 +1,5 @@
 'use strict';
+
 const testAdventure = require('../data/testAdventure.js')
 var utils = require('../utils/writer.js');
 
@@ -31,7 +32,6 @@ exports.adventuresGET = function() {
           .finally(() => client.close())
     })
     .catch(err => reject(utils.respondWithCode(500,'could not connect to db: ' + err)))
-  reject(utils.respondWithCode(500,"could not connect to db"))
   });
 }
 
@@ -66,7 +66,6 @@ exports.adventuresPOST = function(body) {
             .finally(() => client.close())
       })
     .catch(err => reject(utils.respondWithCode(500,'could not connect to db: ' + err)))
-    reject(utils.respondWithCode(500,""));
   });
 }
 
@@ -112,7 +111,6 @@ exports.adventuresAdventureIdGET = function(adventureId) {
           .finally(() => client.close())
     })
     .catch(err => reject(utils.respondWithCode(500,'could not connect to db: ' + err)))
-    reject(utils.respondWithCode(500,"Lul such server error"));
   });
 }
 

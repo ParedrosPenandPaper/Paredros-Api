@@ -4,7 +4,7 @@ info:
   description: "Paredros API for Database"
   version: "0.0.1"
   title: "Paredros API"
-host: "it-projekt19-6.informatik.fh-nuernberg.de:8082"
+host: "it-projekt19-6.informatik.fh-nuernberg.de:8081"
 basePath: "/api"
 tags:
 - name: "adventure"
