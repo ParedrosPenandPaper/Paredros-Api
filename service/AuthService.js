@@ -27,7 +27,7 @@ exports.authLoginPOST = function(email,hashedpassword) {
         .find({email: email, hashedpassword: hashedpassword}).toArray()
 
           .then(user => {
-            console.log(`successfully retrieved user with name "${user[0]}.username}" and email "${user.email}" from db`)
+            console.log(`successfully retrieved user with name "${user[0].username}" and email "${user[0].email}" from db`)
             resolve(utils.respondWithCode(200,user[0].token))
           })
 
