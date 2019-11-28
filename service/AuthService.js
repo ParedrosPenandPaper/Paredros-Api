@@ -28,7 +28,7 @@ exports.authLoginPOST = function(email,hashedpassword) {
 
           .then(user => {
             console.log(`successfully retrieved user with name "${user.username}" and email "${user.email}" from db`)
-            resolve(utils.respondWithCode(200,user.token))
+            resolve(utils.respondWithCode(200,{token : user.token}))
           })
 
           .catch(error => reject(utils.respondWithCode(404,`user with email ${email} does not exist: ${error}`)))
@@ -52,7 +52,7 @@ exports.authRegisterPOST = function(email,username,hashedpassword,salt) {
       username: username,
       iss: "paredrosAPI"
     };
-    var token = jwt.sign(payload , 'secret');
+    var token = jwt.sign(payload , process.env.paredrosSecretKey);
     var user = {
       email: email,
       username: username,
