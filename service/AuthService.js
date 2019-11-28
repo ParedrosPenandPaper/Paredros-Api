@@ -91,7 +91,7 @@ exports.authRegisterPOST = function(email,username,hashedpassword,salt) {
  *
  * no response value expected for this operation
  **/
-exports.authSaltGET = function() {
+exports.authSaltGET = function(email) {
   return new Promise(function(resolve, reject) {
     console.log("trying to get salt from user with email: " + email)
     MongoClient.connect(url, {useNewUrlParser: true, useUnifiedTopology: true})
