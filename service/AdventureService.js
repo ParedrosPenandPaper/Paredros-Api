@@ -36,14 +36,7 @@ exports.adventuresGET = function() {
             client.close()
           })
     })
-<<<<<<< HEAD
     .catch(err => reject(utils.respondWithCode(500,'could not connect to db: ' + err)))
-=======
-    .catch(error => {
-      console.log('could not connect to db: ' + error)
-      reject(error)
-    })
->>>>>>> 73e8fb478decb71c79dbc768c9753d922c1c68b9
   });
 }
 
