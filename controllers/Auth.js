@@ -19,7 +19,7 @@ module.exports.authRegisterPOST = function authRegisterPOST (req, res, next) {
   var username = req.swagger.params['username'].value;
   var hashedpassword = req.swagger.params['hashedpassword'].value;
   var email = req.swagger.params['email'].value;
-  var email = req.swagger.params['salt'].value;
+  var salt = req.swagger.params['salt'].value;
   Auth.authRegisterPOST(email,username,hashedpassword,salt)
     .then(function (response) {
       utils.writeJson(res, response);
