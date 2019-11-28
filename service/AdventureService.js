@@ -3,6 +3,7 @@
 const testAdventure = require('../data/testAdventure.js')
 var utils = require('../utils/writer.js');
 
+const ObjectId = require('mongodb').ObjectId
 const MongoClient = require('mongodb').MongoClient
 const url = 'mongodb://paredros-db:27017'
 const dbName = 'paredros'
@@ -16,22 +17,33 @@ const collName = 'adventures'
  **/
 exports.adventuresGET = function() {
   return new Promise(function(resolve, reject) {
-    console.log("debug 1")
+    console.log("trying to get all adventures")
     MongoClient.connect(url, {useNewUrlParser: true, useUnifiedTopology: true})
     .then(client => {
-      console.log("debug 2")
       client
         .db(dbName)
         .collection(collName)
-        .find({} )
+        .find({}).toArray()
           .then(adventures => {
-            console.log(`successfully retrieved all adventures from db`)
-            resolve(utils.respondWithCode(200,adventures))
+            console.log('successfully retrieved all adventures from db')
+            resolve(adventures)
           })
-          .catch(reject(utils.respondWithCode(404,`adventures does not exist: ${error}`)))
-          .finally(() => client.close())
+          .catch(error => {
+            console.log('failed to retrieve all adventures: ' + error)
+            reject(error)
+          })
+          .finally(() => {
+            client.close()
+          })
     })
+<<<<<<< HEAD
     .catch(err => reject(utils.respondWithCode(500,'could not connect to db: ' + err)))
+=======
+    .catch(error => {
+      console.log('could not connect to db: ' + error)
+      reject(error)
+    })
+>>>>>>> 73e8fb478decb71c79dbc768c9753d922c1c68b9
   });
 }
 
@@ -92,15 +104,13 @@ exports.adventuresDELETE = function() {
  **/
 exports.adventuresAdventureIdGET = function(adventureId) {
   return new Promise(function(resolve, reject) {
-    console.log(adventureId)
+    console.log("trying to get adventure with id: " + adventureId)
     MongoClient.connect(url, {useNewUrlParser: true, useUnifiedTopology: true})
     .then(client => {
-      console.log(adventureId)
       client
         .db(dbName)
         .collection(collName)
-
-        .findOne( {objectID: adventureId} )
+        .findOne(ObjectId(adventureId))
 
           .then(adventure => {
             console.log(`successfully retrieved adventure with id "${adventureId}" and title "${adventure.meta.title}" from db`)
