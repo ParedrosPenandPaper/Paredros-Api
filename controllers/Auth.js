@@ -30,6 +30,7 @@ module.exports.authRegisterPOST = function authRegisterPOST (req, res, next) {
 };
 
 module.exports.authSaltGET = function authSaltGET (req, res, next) {
+  console.log(process.env.paredrosSecretKey)
   var email = req.swagger.params['email'].value;
   Auth.authSaltGET(email)
     .then(function (response) {
