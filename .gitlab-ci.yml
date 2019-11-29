@@ -5,7 +5,9 @@ stages:
   
 test:
   stage: test
-  script: npm run test
+  script:
+    - npm i
+    - npm run test
   tags:
     - deploy
   
