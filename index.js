@@ -20,7 +20,7 @@ app.use(limiter({
   whitelist: [],
   categories: {
     normal: {
-      totalRequests: 5,
+      totalRequests: 15,
       every: (60 * 60 * 1000) / 2
     },
     whitelist: {
