@@ -16,7 +16,8 @@
   "dependencies": {
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
-    "connect": "^3.2.0",
+    "connect": "^3.7.0",
+    "connect-ratelimit": "0.0.7",
     "cors": "^2.8.5",
     "crypto-js": "^3.1.9-1",
     "express": "^4.17.1",
@@ -27,9 +28,5 @@
     "serve-static": "^1.14.1",
     "sjcl": "^1.0.8",
     "swagger-tools": "^0.10.4"
-  },
-  "devDependencies": {
-    "chai": "^4.2.0",
-    "chai-http": "^4.3.0"
   }
 }

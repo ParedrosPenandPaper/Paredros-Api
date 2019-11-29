@@ -10,13 +10,30 @@ var app = require('connect')();
 var swaggerTools = require('swagger-tools');
 var jsyaml = require('js-yaml');
 var serverPort = 80;
+var limiter = require('connect-ratelimit');
 
 //static serve 
 var serveStatic = require('serve-static')
+
+//ratelimiting for node server 
+app.use(limiter({
+  whitelist: [],
+  categories: {
+    normal: {
+      every: (60 * 60 * 1000) / 2
+    },
+    whitelist: {
+      totalRequests: 5000,
+      every: 60 * 60 * 1000
+    }
+  }
+}))
+
+//static routing 
 app.use(serveStatic('public/css', { 'index': false }));
 
 //middleware for Token verifikation 
-app.use("/api/adventures",function middleware1(req, res, next) {
+app.use("/api/adventures",function jsonWebTokenValidatormiddleware(req, res, next) {
   try {
     var decode = jwt.verify(req.headers.token, process.env.paredrosSecretKey);
     console.log(decode)
@@ -26,6 +43,7 @@ app.use("/api/adventures",function middleware1(req, res, next) {
     res.end('Unauthorized');
   }
 });
+
 //app.use(cors({ credentials: true }))
 // swaggerRouter configuration
 var options = {

@@ -21,7 +21,11 @@ paths:
       summary: "Gets all Adventures"
       description: "Gets all user relatet Adventures from the list."
       operationId: "adventuresGET"
-      parameters: []
+      parameters: 
+        - name: token
+          in: header
+          required: true
+          type: string
       responses:
         "200":
           description: "OK"
@@ -33,6 +37,10 @@ paths:
       description: "Adds a Adventure to the list."
       operationId: "adventuresPOST"
       parameters:
+      - name: token
+        in: header
+        required: true
+        type: string
       - in: "body"
         name: "body"
         required: true
@@ -48,7 +56,11 @@ paths:
       summary: "Delets all Adenvtures"
       description: "Delets all user relatet Adventure from the List."
       operationId: "adventuresDELETE"
-      parameters: []
+      parameters: 
+      - name: token
+        in: header
+        required: true
+        type: string
       responses:
         "200":
           description: "OK"
@@ -61,6 +73,10 @@ paths:
       description: "Gets adventure from list by id"
       operationId: "adventuresAdventureIdGET"
       parameters:
+      - name: token
+        in: header
+        required: true
+        type: string
       - name: "adventureId"
         in: "path"
         required: true
@@ -76,6 +92,10 @@ paths:
       description: "Delets adventure by id"
       operationId: "adventuresAdventureIdDELETE"
       parameters:
+      - name: token
+        in: header
+        required: true
+        type: string
       - name: "adventureId"
         in: "path"
         required: true
@@ -91,6 +111,10 @@ paths:
       description: "Updates adventure by id"
       operationId: "adventuresAdventureIdPATCH"
       parameters:
+      - name: token
+        in: header
+        required: true
+        type: string
       - name: "adventureId"
         in: "path"
         required: true
@@ -126,11 +150,11 @@ paths:
       parameters: 
         - name: email
           in: header
-          required: false
+          required: true
           type: string
         - name: hashedpassword
           in: header
-          required: false
+          required: true
           type: string
       responses:
         "200":
@@ -146,19 +170,19 @@ paths:
       parameters: 
         - name: username
           in: header
-          required: false
+          required: true
           type: string
         - name: hashedpassword
           in: header
-          required: false
+          required: true
           type: string
         - name: email
           in: header
-          required: false
+          required: true
           type: string
         - name: salt
           in: header
-          required: false
+          required: true
           type: string
       responses:
         "200":
@@ -174,7 +198,7 @@ paths:
       parameters:
         - name: email
           in: header
-          required: false
+          required: true
           type: string
       responses:
         "200":
