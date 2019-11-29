@@ -10,25 +10,19 @@ var app = require('connect')();
 var swaggerTools = require('swagger-tools');
 var jsyaml = require('js-yaml');
 var serverPort = 80;
-var limiter = require('connect-ratelimit');
+
+
+const rateLimit = require("express-rate-limit");
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100 // limit each IP to 100 requests per windowMs
+});
 
 //static serve 
 var serveStatic = require('serve-static')
 
 //ratelimiting for node server 
-app.use(limiter({
-  whitelist: [],
-  categories: {
-    normal: {
-      totalRequests: 15,
-      every: (60 * 60 * 1000) / 2
-    },
-    whitelist: {
-      totalRequests: 5000,
-      every: 60 * 60 * 1000
-    }
-  }
-}))
+app.use(limiter)
 
 //static routing 
 app.use(serveStatic('public/css', { 'index': false }));
