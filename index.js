@@ -6,6 +6,7 @@ var fs = require('fs'),
 
 var jwt = require('jsonwebtoken');
 var app = require('connect')();
+
 var swaggerTools = require('swagger-tools');
 var jsyaml = require('js-yaml');
 var serverPort = 80;
@@ -21,7 +22,8 @@ app.use("/api/adventures",function middleware1(req, res, next) {
     console.log(decode)
     next();
   } catch(err) {
-    res.end("JWT that was send wasnt vaild");
+    res.statusCode = 401;
+    res.end('Unauthorized');
   }
 });
 //app.use(cors({ credentials: true }))
@@ -58,3 +60,4 @@ swaggerTools.initializeMiddleware(swaggerDoc, function (middleware) {
   });
 
 });
+module.exports = app;

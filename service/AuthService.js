@@ -34,7 +34,7 @@ exports.authLoginPOST = function(email,hashedpassword) {
           .catch(error => reject(utils.respondWithCode(404,`user with email ${email} does not exist: ${error}`)))
           .finally(() => client.close())
     })
-    .catch(err => reject(utils.respondWithCode(500,'could not connect to db: ' + err)))
+    .catch(err => reject(utils.respondWithCode(500,{"error":'could not connect to db: ' + err})))
   });
 }
 
@@ -81,7 +81,7 @@ exports.authRegisterPOST = function(email,username,hashedpassword,salt) {
   
             .finally(() => client.close())
       })
-    .catch(err => reject(utils.respondWithCode(500,'could not connect to db: ' + err)))
+    .catch(err => reject(utils.respondWithCode(500,{"error":'could not connect to db: ' + err})))
   });
 }
  
@@ -109,7 +109,7 @@ exports.authSaltGET = function(email) {
           .catch(error => reject(utils.respondWithCode(404,`user with email ${email} does not exist: ${error}`)))
           .finally(() => client.close())
     })
-    .catch(err => reject(utils.respondWithCode(500,'could not connect to db: ' + err)))
+    .catch(err => reject(utils.respondWithCode(500,{"error":'could not connect to db: ' + err})))
   });
 }
 

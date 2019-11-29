@@ -36,7 +36,7 @@ exports.adventuresGET = function() {
             client.close()
           })
     })
-    .catch(err => reject(utils.respondWithCode(500,'could not connect to db: ' + err)))
+    .catch(err => reject(utils.respondWithCode(500,{"error":'could not connect to db: ' + err})))
   });
 }
 
@@ -70,8 +70,8 @@ exports.adventuresPOST = function(body) {
   
             .finally(() => client.close())
       })
-    .catch(err => reject(utils.respondWithCode(500,'could not connect to db: ' + err)))
-  });
+      .catch(err => reject(utils.respondWithCode(500,{"error":'could not connect to db: ' + err})))
+    });
 }
 
 /**
@@ -113,7 +113,7 @@ exports.adventuresAdventureIdGET = function(adventureId) {
           .catch(error => reject(utils.respondWithCode(404,`adventure with id ${adventureId} does not exist: ${error}`)))
           .finally(() => client.close())
     })
-    .catch(err => reject(utils.respondWithCode(500,'could not connect to db: ' + err)))
+    .catch(err => reject(utils.respondWithCode(500,{"error":'could not connect to db: ' + err})))
   });
 }
 
@@ -149,7 +149,7 @@ exports.adventuresAdventureIdPATCH = function(adventureId,body) {
 
             .finally(() => client.close())
       })
-      .catch(err => reject(utils.respondWithCode(500,'could not connect to db: ' + err)))
+      .catch(err => reject(utils.respondWithCode(500,{"error":'could not connect to db: ' + err})))
       });
 }
 
@@ -182,7 +182,7 @@ exports.adventuresAdventureIdDELETE = function(adventureId) {
 
           .finally(() => client.close())
     })
-    .catch(err => reject(utils.respondWithCode(500,'could not connect to db: ' + err)))
+    .catch(err => reject(utils.respondWithCode(500,{"error":'could not connect to db: ' + err})))
   });
 }
 
