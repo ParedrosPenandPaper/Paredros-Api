@@ -49,6 +49,7 @@ exports.adventuresGET = function() {
 exports.adventuresPOST = function(body) {
   return new Promise(function(resolve, reject) {
     var adventure = body;
+    console.log("try to connect to database")
     MongoClient.connect(url, {useNewUrlParser: true, useUnifiedTopology: true})
       .then(client => {
         client
