@@ -99,7 +99,7 @@ paths:
       - name: "adventureId"
         in: "path"
         required: true
-        type: "integer"
+        type: string
       responses:
         "200":
           description: "OK"
