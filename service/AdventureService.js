@@ -49,7 +49,6 @@ exports.adventuresGET = function() {
 exports.adventuresPOST = function(body) {
   return new Promise(function(resolve, reject) {
     var adventure = body;
-    console.log(`trying to store adventure with id "${adventure._id}" and title "${adventure.meta.title}"`)
     MongoClient.connect(url, {useNewUrlParser: true, useUnifiedTopology: true})
       .then(client => {
         client
