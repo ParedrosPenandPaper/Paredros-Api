@@ -1,6 +1,7 @@
 'use strict';
 
 var utils = require('../utils/writer.js');
+var jwt = require('jsonwebtoken');
 
 const ObjectId = require('mongodb').ObjectId
 const MongoClient = require('mongodb').MongoClient
@@ -14,15 +15,17 @@ const collName = 'adventures'
  *
  * no response value expected for this operation
  **/
-exports.adventuresGET = function() {
+exports.adventuresGET = function(token) {
   return new Promise(function(resolve, reject) {
+    var decoded = jwt.decode(token);
+    console.log(decoded)
     console.log("trying to get all adventures")
     MongoClient.connect(url, {useNewUrlParser: true, useUnifiedTopology: true})
     .then(client => {
       client
         .db(dbName)
         .collection(collName)
-        .find({}).toArray()
+        .find({"meta.email": decoded.email}).toArray()
           .then(adventures => {
             console.log('successfully retrieved all adventures from db')
             resolve(utils.respondWithCode(200,adventures))

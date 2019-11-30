@@ -48,7 +48,8 @@ module.exports.adventuresDELETE = function adventuresDELETE (req, res, next) {
 };
 
 module.exports.adventuresGET = function adventuresGET (req, res, next) {
-  Adventure.adventuresGET()
+  var token = req.swagger.params['token'].value;
+  Adventure.adventuresGET(token)
     .then(function (response) {
       utils.writeJson(res, response);
     })
