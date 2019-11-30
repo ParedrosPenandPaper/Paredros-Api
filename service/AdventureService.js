@@ -49,7 +49,7 @@ exports.adventuresGET = function() {
 exports.adventuresPOST = function(body) {
   return new Promise(function(resolve, reject) {
     var adventure = body;
-    console.log("try to connect to database")
+    console.log("init database connection")
     MongoClient.connect(url, {useNewUrlParser: true, useUnifiedTopology: true})
       .then(client => {
         client
@@ -135,7 +135,7 @@ exports.adventuresAdventureIdPATCH = function(adventureId,body) {
           .db(dbName)
           .collection(collName)
 
-          .replaceOne( {_id: adventureId}, adventure )
+          .update( {_id: adventureId}, adventure )
 
             .then(id => {
               console.log(`successfully updated adventure with id "${id} in db"`)

@@ -15,7 +15,7 @@ var serverPort = 80;
 const rateLimit = require("express-rate-limit");
 const limiter = rateLimit({
   windowMs: 60 * 60 * 1000, // 60 minutes = 60 x 60sec x 1000 milisec
-  max: 100 // limit each IP to 100 requests per windowMs
+  max: 200 // limit each IP to 100 requests per windowMs
 });
 
 //static serve 

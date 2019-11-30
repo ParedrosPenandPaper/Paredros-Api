@@ -118,7 +118,7 @@ paths:
       - name: "adventureId"
         in: "path"
         required: true
-        type: "integer"
+        type: string
       - in: "body"
         name: "body"
         required: true
