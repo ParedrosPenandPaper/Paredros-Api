@@ -135,7 +135,7 @@ exports.adventuresAdventureIdPATCH = function(adventureId,body) {
           .db(dbName)
           .collection(collName)
           
-          .updateOne( { "_id": ObjectId(adventureId)}, {$set: {adventure}} )
+          .updateOne( { "_id": ObjectId(adventureId)}, {$set: adventure} )
 
             .then(id => {
               console.log(`successfully updated adventure with id "${id} in db"`)
