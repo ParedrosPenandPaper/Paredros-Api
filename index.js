@@ -28,7 +28,7 @@ app.use(limiter)
 app.use(serveStatic('public', { 'index': false }));
 
 //middleware for Token verifikation 
-/*app.use("/api/adventures",function jsonWebTokenValidatormiddleware(req, res, next) {
+app.use("/api/adventures",function jsonWebTokenValidatormiddleware(req, res, next) {
   try {
     var decode = jwt.verify(req.headers.token, process.env.paredrosSecretKey);
     console.log(decode)
@@ -37,7 +37,7 @@ app.use(serveStatic('public', { 'index': false }));
     res.statusCode = 401;
     res.end('Unauthorized');
   }
-});*/
+});
 
 //app.use(cors({ credentials: true }))
 // swaggerRouter configuration

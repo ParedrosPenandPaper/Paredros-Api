@@ -15,21 +15,6 @@ schemes:
 - "http"
 paths:
   /adventures:
-    get:
-      tags:
-      - "adventure"
-      summary: "Gets all Adventures"
-      description: "Gets all user relatet Adventures from the list."
-      operationId: "adventuresGET"
-      parameters: 
-        - name: token
-          in: header
-          required: true
-          type: string
-      responses:
-        "200":
-          description: "OK"
-      x-swagger-router-controller: "Adventure"
     post:
       tags:
       - "adventure"
@@ -61,6 +46,22 @@ paths:
         in: header
         required: true
         type: string
+      responses:
+        "200":
+          description: "OK"
+      x-swagger-router-controller: "Adventure"
+  /adventures/userAdventures:
+    get:
+      tags:
+      - "adventure"
+      summary: "Gets all Adventures from a specificUser"
+      description: "Gets all user relatet Adventures from the list."
+      operationId: "adventuresGET"
+      parameters: 
+        - name: token
+          in: header
+          required: true
+          type: string
       responses:
         "200":
           description: "OK"
