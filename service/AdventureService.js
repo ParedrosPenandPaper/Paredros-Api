@@ -1,6 +1,5 @@
 'use strict';
 
-const testAdventure = require('../data/testAdventure.js')
 var utils = require('../utils/writer.js');
 
 const ObjectId = require('mongodb').ObjectId
@@ -183,25 +182,5 @@ exports.adventuresAdventureIdDELETE = function(adventureId) {
           .finally(() => client.close())
     })
     .catch(error => reject(utils.respondWithCode(500,{"error":'could not connect to db: ' + error})))
-  });
-}
-
-/**
- * Get test Adventure
- * get a test Adventure for beginners to learn writing stories.
- *
- * no response value expected for this operation
- **/
-exports.adventuresTestAdventureGET = function() {
-  return new Promise(function(resolve, reject) {
-    console.log('test-adventure requested')
-    if(testAdventure !== undefined && testAdventure !== null) {
-      console.log(`responding with test-adventure, id "${testAdventure._id}", title "${testAdventure.meta.title}"`)
-      resolve(utils.respondWithCode(200,testAdventure));
-    }
-    else {
-      console.log('failed to retrieve a test-adventure')
-      reject(utils.respondWithCode(504,{'errorcode':'no test-adventure available'}))
-    }
   });
 }

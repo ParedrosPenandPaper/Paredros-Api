@@ -128,18 +128,6 @@ paths:
         "200":
           description: "OK"
       x-swagger-router-controller: "Adventure"
-  /adventures/testAdventure:
-    get:
-      tags:
-      - "adventure"
-      summary: "Get test Adventure"
-      description: "get a test Adventure for beginners to learn writing stories."
-      operationId: "adventuresTestAdventureGET"
-      parameters: []
-      responses:
-        "200":
-          description: "OK"
-      x-swagger-router-controller: "Adventure"
   /auth/login:
     post:
       tags:

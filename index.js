@@ -25,7 +25,7 @@ var serveStatic = require('serve-static')
 app.use(limiter)
 
 //static routing 
-app.use(serveStatic('public/css', { 'index': false }));
+app.use(serveStatic('public', { 'index': false }));
 
 //middleware for Token verifikation 
 app.use("/api/adventures",function jsonWebTokenValidatormiddleware(req, res, next) {

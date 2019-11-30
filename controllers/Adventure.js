@@ -67,13 +67,3 @@ module.exports.adventuresPOST = function adventuresPOST (req, res, next) {
       utils.writeJson(res, response);
     });
 };
-
-module.exports.adventuresTestAdventureGET = function adventuresTestAdventureGET (req, res, next) {
-  Adventure.adventuresTestAdventureGET()
-    .then(function (response) {
-      utils.writeJson(res, response);
-    })
-    .catch(function (response) {
-      utils.writeJson(res, response);
-    });
-};
