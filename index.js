@@ -10,7 +10,7 @@ var app = require('connect')();
 var swaggerTools = require('swagger-tools');
 var jsyaml = require('js-yaml');
 var serverPort = 80;
-
+var cors = require('cors');
 
 const rateLimit = require("express-rate-limit");
 const limiter = rateLimit({
