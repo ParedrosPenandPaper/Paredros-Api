@@ -21,6 +21,8 @@ const limiter = rateLimit({
 //static serve 
 var serveStatic = require('serve-static')
 
+app.use(cors({ credentials: true }))
+
 //ratelimiting for node server 
 app.use(limiter)
 
@@ -39,7 +41,6 @@ app.use("/api/adventures",function jsonWebTokenValidatormiddleware(req, res, nex
   }
 });
 
-//app.use(cors({ credentials: true }))
 // swaggerRouter configuration
 var options = {
   swaggerUi: path.join(__dirname, '/swagger.json'),
