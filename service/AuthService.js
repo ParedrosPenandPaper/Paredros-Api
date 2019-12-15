@@ -106,7 +106,7 @@ exports.authSaltGET = function(email) {
             resolve(utils.respondWithCode(200,user.salt))
           })
 
-          .catch(error => reject(utils.respondWithCode(404,`user with email ${email} does not exist: ${error}`)))
+          .catch(error => reject(utils.respondWithCode(404,{"error":`user with email ${email} does not exist: ${error}`})))
           .finally(() => client.close())
     })
     .catch(err => reject(utils.respondWithCode(500,{"error":'could not connect to db: ' + err})))
