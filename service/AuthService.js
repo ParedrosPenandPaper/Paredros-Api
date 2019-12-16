@@ -102,14 +102,14 @@ exports.authSaltGET = function(email) {
         .findOne({email: email})
 
           .then(user => {
-            console.log(`successfully retrieved salt from user with name "${user.username}" and email "${user.email}" from db`)
-            resolve(utils.respondWithCode(200,user.salt))
+            console.log(`successfully retrieved salt from user with name "${user.username} " and email "${user.email}" from db`)
+            resolve(utils.respondWithCode(200,{salt : user.salt}))
           })
 
-          .catch(error => reject(utils.respondWithCode(404,{"error":`user with email ${email} does not exist: ${error}`})))
+          .catch(error => reject(utils.respondWithCode(404,{"error":"user with email"+ email + "does not exist"})))
           .finally(() => client.close())
     })
-    .catch(err => reject(utils.respondWithCode(500,{"error":'could not connect to db: ' + err})))
+    .catch(err => reject(utils.respondWithCode(500,{"error":"could not connect to db"})))
   });
 }
 
