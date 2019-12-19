@@ -31,7 +31,7 @@ exports.authLoginPOST = function(email,hashedpassword) {
             resolve(utils.respondWithCode(200,{token : user.token}))
           })
 
-          .catch(error => reject(utils.respondWithCode(404,`user with email ${email} does not exist: ${error}`)))
+          .catch(error => reject(utils.respondWithCode(404,{"error":`user with email ${email} does not exist: ${error}`})))
           .finally(() => client.close())
     })
     .catch(err => reject(utils.respondWithCode(500,{"error":'could not connect to db: ' + err})))
@@ -76,7 +76,7 @@ exports.authRegisterPOST = function(email,username,hashedpassword,salt) {
   
             .catch(error => {
               console.log(error)
-              reject(utils.respondWithCode(500,{'error':`unable to store user with name "${username}" and email "${email}" in db: ${error}`}))
+              reject(utils.respondWithCode(409,{'error':`unable to store user with name "${username}" and email "${email}" in db: ${error}`}))
             })
   
             .finally(() => client.close())

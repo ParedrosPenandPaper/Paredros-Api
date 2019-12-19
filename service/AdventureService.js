@@ -67,7 +67,7 @@ exports.adventuresPOST = function(body) {
   
             .catch(error => {
               console.log(error)
-              reject(utils.respondWithCode(500,`unable to store adventure with id "${adventure._id}" and title "${adventure.meta.title}" in db: ${error}`))
+              reject(utils.respondWithCode(500,{"error":`unable to store adventure with id "${adventure._id}" and title "${adventure.meta.title}" in db: ${error}`}))
             })
   
             .finally(() => client.close())
@@ -112,7 +112,7 @@ exports.adventuresAdventureIdGET = function(adventureId) {
             resolve(utils.respondWithCode(200,adventure))
           })
 
-          .catch(error => reject(utils.respondWithCode(404,`adventure with id ${adventureId} does not exist: ${error}`)))
+          .catch(error => reject(utils.respondWithCode(404,{"error":`adventure with id ${adventureId} does not exist: ${error}`})))
           .finally(() => client.close())
     })
     .catch(error => reject(utils.respondWithCode(500,{"error":'could not connect to db: ' + error})))
@@ -146,7 +146,7 @@ exports.adventuresAdventureIdPATCH = function(adventureId,body) {
 
             .catch(error => {
               console.log(error)
-              reject(utils.respondWithCode(500,`unable to update adventure with id "${adventure._id}" and title "${adventure.meta.title}" in db: ${error}`))
+              reject(utils.respondWithCode(500,{"error":`unable to update adventure with id "${adventure._id}" and title "${adventure.meta.title}" in db: ${error}`}))
             })
 
             .finally(() => client.close())
@@ -179,7 +179,7 @@ exports.adventuresAdventureIdDELETE = function(adventureId) {
 
           .catch(error => {
             console.log(error)
-            reject(utils.respondWithCode(500,`unable to delete adventure with id "${adventureId}" from in db: ${error}`))
+            reject(utils.respondWithCode(500,{"error":`unable to delete adventure with id "${adventureId}" from in db: ${error}`}))
           })
 
           .finally(() => client.close())
