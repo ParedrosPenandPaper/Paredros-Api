@@ -76,7 +76,7 @@ exports.authRegisterPOST = function(email,username,hashedpassword,salt) {
   
             .catch(error => {
               console.log(error)
-              reject(utils.respondWithCode(500,`unable to store user with name "${username}" and email "${email}" in db: ${error}`))
+              reject(utils.respondWithCode(500,{'error':`unable to store user with name "${username}" and email "${email}" in db: ${error}`}))
             })
   
             .finally(() => client.close())
