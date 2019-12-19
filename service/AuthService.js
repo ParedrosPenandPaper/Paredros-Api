@@ -3,7 +3,6 @@
 var utils = require('../utils/writer.js');
 var jwt = require('jsonwebtoken');
 
-const ObjectId = require('mongodb').ObjectId
 const MongoClient = require('mongodb').MongoClient
 const url = 'mongodb://paredros-db:27017'
 const dbName = 'paredros'
@@ -31,7 +30,7 @@ exports.authLoginPOST = function(email,hashedpassword) {
             resolve(utils.respondWithCode(200,{token : user.token}))
           })
 
-          .catch(error => reject(utils.respondWithCode(404,{"error":`user with email ${email} does not exist: ${error}`})))
+          .catch(error => reject(utils.respondWithCode(404,{"error":`user with email "${email}" does not exist: "${error}"`})))
           .finally(() => client.close())
     })
     .catch(err => reject(utils.respondWithCode(500,{"error":'could not connect to db: ' + err})))
@@ -76,7 +75,7 @@ exports.authRegisterPOST = function(email,username,hashedpassword,salt) {
   
             .catch(error => {
               console.log(error)
-              reject(utils.respondWithCode(409,{'error':`unable to store user with name "${username}" and email "${email}" in db: ${error}`}))
+              reject(utils.respondWithCode(409,{'error':`unable to store user with name "${username}" and email "${email}" in db: "${error}"`}))
             })
   
             .finally(() => client.close())
@@ -106,7 +105,7 @@ exports.authSaltGET = function(email) {
             resolve(utils.respondWithCode(200,{salt : user.salt}))
           })
 
-          .catch(error => reject(utils.respondWithCode(404,{"error":"user with email"+ email + "does not exist"})))
+          .catch(error => reject(utils.respondWithCode(404,{"error":"user with email "+ email + " does not exist"})))
           .finally(() => client.close())
     })
     .catch(err => reject(utils.respondWithCode(500,{"error":"could not connect to db"})))

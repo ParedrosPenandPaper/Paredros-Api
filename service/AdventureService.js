@@ -57,19 +57,15 @@ exports.adventuresPOST = function(body) {
         client
           .db(dbName)
           .collection(collName)
-  
           .insertOne(adventure)
-  
             .then(id => {
-              console.log(`successfully stored adventure "${id} in db"`)
+              console.log(`successfully stored adventure "${id}" in db`)
               resolve(utils.respondWithCode(201,adventure))
             })
-  
             .catch(error => {
               console.log(error)
-              reject(utils.respondWithCode(500,{"error":`unable to store adventure with id "${adventure._id}" and title "${adventure.meta.title}" in db: ${error}`}))
+              reject(utils.respondWithCode(500,{"error":`unable to store adventure with id "${adventure._id}" and title "${adventure.meta.title}" in db: "${error}"`}))
             })
-  
             .finally(() => client.close())
       })
       .catch(error => reject(utils.respondWithCode(500,{"error":'could not connect to db: ' + error})))
@@ -79,6 +75,7 @@ exports.adventuresPOST = function(body) {
 /**
  * Delets all Adenvtures
  * Delets all user relatet Adventure from the List.
+ * There is no usecase for it yet
  *
  * no response value expected for this operation
  **/
@@ -87,8 +84,6 @@ exports.adventuresDELETE = function() {
     resolve();
   });
 }
-
-
 
 /**
  * Gets adventure by id
@@ -106,13 +101,11 @@ exports.adventuresAdventureIdGET = function(adventureId) {
         .db(dbName)
         .collection(collName)
         .findOne(ObjectId(adventureId))
-
           .then(adventure => {
             console.log(`successfully retrieved adventure with id "${adventureId}" and title "${adventure.meta.title}" from db`)
             resolve(utils.respondWithCode(200,adventure))
           })
-
-          .catch(error => reject(utils.respondWithCode(404,{"error":`adventure with id ${adventureId} does not exist: ${error}`})))
+          .catch(error => reject(utils.respondWithCode(404,{"error":`adventure with id "${adventureId}" does not exist: "${error}"`})))
           .finally(() => client.close())
     })
     .catch(error => reject(utils.respondWithCode(500,{"error":'could not connect to db: ' + error})))
@@ -136,19 +129,15 @@ exports.adventuresAdventureIdPATCH = function(adventureId,body) {
         client
           .db(dbName)
           .collection(collName)
-          
           .updateOne( { _id: ObjectId(adventureId)}, {$set: adventure} )
-
             .then(id => {
-              console.log(`successfully updated adventure with id "${id} in db"`)
+              console.log(`successfully updated adventure with id "${id}" in db"`)
               resolve(utils.respondWithCode(200,adventure))
             })
-
             .catch(error => {
               console.log(error)
-              reject(utils.respondWithCode(500,{"error":`unable to update adventure with id "${adventure._id}" and title "${adventure.meta.title}" in db: ${error}`}))
+              reject(utils.respondWithCode(500,{"error":`unable to update adventure with id "${adventure._id}" and title "${adventure.meta.title}" in db: "${error}"`}))
             })
-
             .finally(() => client.close())
       })
       .catch(error => reject(utils.respondWithCode(500,{"error":'could not connect to db: ' + error})))
@@ -176,12 +165,10 @@ exports.adventuresAdventureIdDELETE = function(adventureId) {
             console.log(`successfully deleted adventure with id "${id}" from db"`)
             resolve()
           })
-
           .catch(error => {
             console.log(error)
-            reject(utils.respondWithCode(500,{"error":`unable to delete adventure with id "${adventureId}" from in db: ${error}`}))
+            reject(utils.respondWithCode(500,{"error":`unable to delete adventure with id "${adventureId}" from in db: "${error}"`}))
           })
-
           .finally(() => client.close())
     })
     .catch(error => reject(utils.respondWithCode(500,{"error":'could not connect to db: ' + error})))
